@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Voting Telah Dilakukan BEM FTI Universitas Tarumanagara</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container-vote-success">
+      <div class="success-message">
+        <h1>Anda Telah Vote!</h1>
+        <p>Terima Kasih Atas Partisipasi Anda</p>
+        <div class="result-button-container">
+          <a href="/hasil-voting" class="result-button">Lihat Hasil Voting</a>
+          <a href="#" class="voucher-button" onclick="openModal()">
+            Claim Voucher Anda
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal" id="voucherModal">
+      <div class="modal-content">
+        <span class="close-button" onclick="closeModal()">&times;</span>
+        <img th:src="@{/image/pic4-qrcode.png}" alt="Voucher Image"/>
+        <p>Silahkan scan QR Code ini untuk mengclaim voucher Anda!</p>
+      </div>
+    </div>
+
+    <script>
+      // Function to open modal
+      function openModal() {
+        document.getElementById("voucherModal").style.display = "flex";
+      }
+
+      // Function to close modal
+      function closeModal() {
+        document.getElementById("voucherModal").style.display = "none";
+      }
+
+      // Close modal if clicked outside of modal content
+      window.onclick = function (event) {
+        if (event.target === document.getElementById("voucherModal")) {
+          closeModal();
+        }
+      };
+    </script>
+  </body>
+</html>

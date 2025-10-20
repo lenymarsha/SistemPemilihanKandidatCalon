@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    />
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container-log-sign">
+      <div class="signup-box">
+        <h2>Create Account</h2>
+        <form
+          th:action="@{/signup/submit}"
+          method="post"
+          th:object="${signUpInfo}"
+        >
+          <div class="input-group">
+            <label for="new-username">Username</label>
+            <input
+              type="text"
+              id="new-username"
+              name="username"
+              required
+              placeholder="Enter Your Full Name"/>
+          </div>
+
+          <div class="input-group">
+            <label for="new-nim">NIM</label>
+            <input
+              type="text"
+              id="nim"
+              name="nim"
+              required
+              placeholder="Enter Your NIM"
+              oninput="validateNIM()"/>
+          </div>
+
+          <div class="input-group">
+            <label for="new-password">Password</label>
+            <input
+              type="password"
+              id="new-password"
+              name="password"
+              required
+              placeholder="Create A Password"
+            />
+          </div>
+
+          <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+        <p th:text="${error}" class="error-message"></p>
+
+        <div class="login-prompt">
+          <p>Sudah punya akun?</p>
+          <a href="/login" class="login-link">Log In</a>
+        </div>
+      </div>
+    </div>
+    <script th:src="@{/js/home.js}"></script>
+  </body>
+</html>

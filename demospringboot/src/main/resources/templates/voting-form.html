@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Form Pemilihan BEM FTI Universitas Tarumanagara</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container-vote-form">
+      <h1 class="main-title">Form Pemilihan Kandidat</h1>
+      <div class="voting-section">
+        <form th:action="@{/vote}" method="post" th:object="${votingInfo}" class="voting-form">
+          <!-- Nama Lengkap -->
+          <div class="form-group">
+            <label for="username">Nama Lengkap:</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              th:value="${username}"
+              readonly/>
+          </div>
+          <!-- NIM -->
+          <div class="form-group">
+            <label for="nim">NIM:</label>
+            <input
+              type="text"
+              id="nim"
+              name="nim"
+              th:value="${nim}"
+              readonly/>
+          </div>
+          <!-- Dropdown Kandidat -->
+          <div class="form-group">
+            <label for="pilihan">Pilihan Kandidat:</label>
+            <select id="pilihan" name="pilihan" required>
+              <option value="" disabled selected>-- Pilih kandidat --</option>
+              <option
+                th:each="kandidat : ${kandidats}"
+                th:value="${kandidat.namaKandidat}"
+                th:text="${kandidat.namaKandidat}">
+              </option>
+            </select>
+          </div>
+          <button type="submit" class="submit-button">Submit Pilihan</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

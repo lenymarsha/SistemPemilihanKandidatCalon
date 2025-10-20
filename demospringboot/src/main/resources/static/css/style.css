@@ -1,0 +1,724 @@
+:root {
+  --primary-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #60a5fa 100%);
+  --hover-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --background-color: #f8fafc;
+  --card-background: rgba(255, 255, 255, 0.9);
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --error-color: #ef4444;
+  --main-gradient: linear-gradient(
+    135deg,
+    #6c5ce7,
+    #74b9ff
+  ); /* New gradient for background */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background: linear-gradient(
+    to right,
+    rgba(138, 139, 240, 0.593),
+    rgba(177, 144, 254, 0.438)
+  );
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CSS UNTUK LOG IN LOG OUT */
+.container-log-sign {
+  width: 90%;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.login-box,
+.signup-box {
+  background: var(--card-background);
+  backdrop-filter: blur(10px);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06), 0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+  transition: transform 0.2s ease;
+}
+
+.login-box:hover,
+.signup-box:hover {
+  transform: translateY(-2px);
+}
+
+h2 {
+  color: var(--text-primary);
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+  position: relative;
+}
+
+label {
+  display: block;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+}
+
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+  outline: none;
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 4px rgba(139, 92, 246, 0.1);
+}
+
+.login-btn,
+.signup-btn {
+  width: 100%;
+  padding: 0.875rem;
+  border: none;
+  border-radius: 12px;
+  background: var(--primary-gradient);
+  color: white;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+.login-btn:hover,
+.signup-btn:hover {
+  background: var(--hover-gradient);
+  transform: translateY(-2px);
+}
+
+.login-btn:active,
+.signup-btn:active {
+  transform: translateY(0);
+}
+
+.signup-prompt,
+.login-prompt {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.signup-prompt p,
+.login-prompt p {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+}
+
+a.signup-btn,
+a.login-link {
+  display: inline-block;
+  padding: 0.75rem 2rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+}
+
+a.signup-btn {
+  background: var(--secondary-gradient);
+  color: white;
+  border: none;
+}
+
+a.login-link {
+  background: transparent;
+  color: #6366f1;
+  border: 2px solid #6366f1;
+}
+
+a.signup-btn:hover,
+a.login-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(99, 102, 241, 0.2);
+}
+
+.error-message {
+  display: none; /* Hidden by default */
+  color: var(--error-color); /* Red color for error */
+  text-align: center;
+  margin: 1rem 0;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.75rem;
+  background-color: rgba(239, 68, 68, 0.1);
+  border-radius: 8px;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Show error message when it exists */
+.error-message:not(:empty) {
+  display: block;
+}
+
+/* Alert */
+
+.alert-success {
+  z-index: 1000;
+  min-width: 300px;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  color: #155724;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.alert-dismissible .btn-close {
+  padding: 0.75rem 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Add smooth animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-box,
+.signup-box {
+  animation: fadeIn 0.6s ease-out;
+}
+
+/* CSS UNTUK KANDIDAT */
+.container-kandidat {
+  max-width: 750px;
+  width: 90%;
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0px 15px 50px rgba(108, 92, 231, 0.15);
+  overflow: hidden;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+
+.main-title {
+  font-size: 30px;
+  font-weight: 800;
+  color: #6c5ce7;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 5px rgba(108, 92, 231, 0.2);
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #74b9ff;
+  margin-bottom: 25px;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.kandidat-list {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.kandidat-card {
+  background: #f8f9ff;
+  border: 2px solid #e6e6ff;
+  border-radius: 15px;
+  padding: 25px;
+  text-align: left;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 10px 20px rgba(162, 155, 254, 0.2);
+  cursor: pointer;
+}
+
+.kandidat-card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 20px 30px rgba(162, 155, 254, 0.3);
+}
+
+.kandidat-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.kandidat-photo img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 5px solid #6c5ce7;
+}
+
+.kandidat-name h2 {
+  font-size: 24px;
+  color: #6c5ce7;
+  font-weight: 600;
+  margin: 0;
+  text-transform: capitalize;
+}
+
+.kandidat-description {
+  margin-top: 15px;
+}
+
+.kandidat-description p {
+  font-size: 16px;
+  color: #555;
+  margin: 0;
+  font-style: italic;
+  line-height: 1.7;
+}
+
+.navigation-buttons {
+  margin-top: 30px;
+}
+
+.next-button {
+  display: inline-block;
+  padding: 16px 32px;
+  font-size: 18px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6c5ce7, #74b9ff);
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: transform 0.3s ease, background 0.3s ease;
+  box-shadow: 0 5px 15px rgba(108, 92, 231, 0.25);
+}
+
+.next-button:hover {
+  background: linear-gradient(135deg, #5b4dc4, #66a8e1);
+  transform: translateY(-4px);
+}
+
+.next-button:active {
+  transform: scale(0.98);
+}
+
+.accordion-button span {
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 30px 20px;
+  }
+
+  .main-title {
+    font-size: 26px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .kandidat-card {
+    padding: 20px;
+  }
+
+  .kandidat-photo img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .kandidat-name h2 {
+    font-size: 20px;
+  }
+
+  .kandidat-description p {
+    font-size: 14px;
+  }
+}
+
+/* Kandidat Detail Page */
+
+/* ===== Navbar Style ===== */
+.navbar {
+  max-width: 750px;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 20px;
+  overflow: visible; /* Changed from hidden to visible */
+  box-shadow: 0px 15px 50px rgba(108, 92, 231, 0.15);
+  background-color: white;
+  z-index: 1000; /* Increased z-index */
+  position: relative; /* Added position relative */
+}
+
+.nav-item.dropdown {
+  position: relative; /* Reset position */
+}
+
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%; /* Position below the parent */
+  left: 0; /* Align with left edge of parent */
+  z-index: 1001;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+  margin-top: 0.5rem; /* Add small gap between button and dropdown */
+  min-width: 160px; /* Minimum width for dropdown */
+  padding: 0.5rem 0;
+}
+
+.dropdown-item {
+  padding: 0.5rem 1rem;
+  color: #212529;
+  text-decoration: none;
+  display: block;
+  white-space: nowrap;
+}
+
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+.dropdown-menu.show {
+  display: block; /* Show when activated */
+}
+
+/* Container Styles */
+
+.container-kandidatin {
+  max-width: 750px;
+  width: 90%;
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 30px;
+  text-align: center;
+  box-shadow: 0px 15px 50px rgba(108, 92, 231, 0.15);
+  overflow: hidden;
+  margin: 30px auto;
+  position: relative;
+  z-index: 1; /* Lower than navbar */
+}
+
+/* Responsiveness untuk Navbar */
+@media (max-width: 768px) {
+  .navbar {
+    width: 95%;
+  }
+}
+
+.kandidat-description {
+  font-size: 16px;
+  color: #555;
+  line-height: 1.6;
+}
+
+.kandidat-description li {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-style: normal;
+}
+
+.navigation-buttons {
+  margin-top: 30px;
+  text-align: center;
+}
+
+/* CSS UNTUK VOTING FORM */
+.container-vote-form {
+  background-color: #fff;
+  padding: 40px 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+}
+
+.main-title {
+  font-size: 24px;
+  color: #6c5ce7;
+  margin-bottom: 20px;
+}
+
+.voting-section {
+  margin-top: 20px;
+}
+
+.voting-form .form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.form-group label {
+  display: block;
+  color: #555;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.form-group input[type="text"],
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group select:focus {
+  border-color: #6c5ce7;
+  box-shadow: 0 0 8px rgba(108, 92, 231, 0.3);
+}
+
+.submit-button {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #6c5ce7, #74b9ff);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.submit-button:hover {
+  background: linear-gradient(135deg, #5b4dc4, #66a8e1);
+  transform: scale(1.05);
+}
+
+.submit-button:active {
+  transform: scale(0.95);
+}
+
+/* CSS UNTUK VOTING SUCCES */
+.container-vote-success {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+}
+
+.success-message h1 {
+  color: #6c5ce7;
+  font-size: 24px;
+}
+
+.success-message p {
+  color: #555;
+  margin: 10px 0 20px;
+}
+
+.result-button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.result-button,
+.voucher-button {
+  display: inline-block;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #6c5ce7, #74b9ff);
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.result-button:hover,
+.voucher-button:hover {
+  background: linear-gradient(135deg, #5b4dc4, #66a8e1);
+  transform: scale(1.05);
+}
+
+.result-button:active,
+.voucher-button:active {
+  transform: scale(0.95);
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 90%;
+  width: 300px;
+}
+
+.modal-content img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.close-button {
+  color: #555;
+  font-size: 24px;
+  font-weight: bold;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  cursor: pointer;
+}
+
+/* CSS UNTUK HASIL VOTING */
+.hasil-container {
+  background-color: #ffffff;
+  width: 90%;
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+h2 {
+  color: #6c5ce7;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+.hasil-total h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.hasil-card {
+  margin-top: 20px;
+  padding: 20px;
+  border-top: 1px solid #eee;
+}
+
+.kandidat-result {
+  background-color: #f3f3ff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(108, 92, 231, 0.1);
+}
+
+.kandidat-result h3 {
+  margin: 0;
+  font-size: 18px;
+  color: #6c5ce7;
+}
+
+.kandidat-result p {
+  color: #555;
+  font-size: 14px;
+  margin: 8px 0;
+}
+
+.progress-bar {
+  background-color: #dfe6e9;
+  border-radius: 5px;
+  overflow: hidden;
+  height: 12px;
+  margin-top: 5px;
+}
+
+.progress {
+  background: linear-gradient(135deg, #6c5ce7, #74b9ff);
+  height: 100%;
+  width: 0%;
+  border-radius: 5px;
+  transition: width 0.4s ease;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  color: #ffffff;
+  background: linear-gradient(135deg, #6c5ce7, #74b9ff);
+  border-radius: 25px;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.back-button:hover {
+  background: linear-gradient(135deg, #5b4dc4, #66a8e1);
+  transform: scale(1.05);
+}
+
+.back-button:active {
+  transform: scale(0.95);
+}

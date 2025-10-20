@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}" />
+  </head>
+  <body>
+    <div class="container-log-sign">
+      <div class="login-box">
+        <h2>Admin Login</h2>
+        <form
+          th:action="@{/admin/login/submit}"
+          method="post"
+          th:object="${adminLoginInfo}"
+        >
+          <div class="input-group">
+            <label for="username">NIK (Nomor Induk Karyawan)</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              required
+              placeholder="Enter your NIK"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              required
+              placeholder="Enter your password"
+            />
+          </div>
+
+          <button type="submit" class="login-btn">Log In</button>
+        </form>
+        <p th:text="${error}" class="error-message"></p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Admin Dashboard - Kandidat</title>
+    <link rel="stylesheet" th:href="@{/css/home.css}" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      th:href="@{/css/bootstrap.min.css}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="containeradmin">
+      <div
+        th:if="${successMessage}"
+        class="alert alert-success alert-dismissible fade show"
+        role="alert"
+      >
+        <span th:text="${successMessage}"></span>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="alert"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <!-- Daftar Kandidat -->
+      <div class="first-box">
+        <h2>Daftar Kandidat</h2>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>No</th>
+              <th>Nama Kandidat</th>
+              <th>Visi</th>
+              <th>Misi</th>
+              <th>Slogan</th>
+              <th>Foto</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="k, no : ${kanList}">
+              <td th:text="${no.count}"></td>
+              <td th:text="${k.namaKandidat}"></td>
+              <td th:text="${k.visi}"></td>
+              <td th:text="${k.misi}"></td>
+              <td th:text="${k.sloganKandidat}"></td>
+              <td>
+                <img
+                  th:if="${k.fotoKandidat}"
+                  th:src="@{${'/image/' + k.fotoKandidat}}"
+                  alt="Foto Kandidat"
+                  width="50"
+                  height="50"
+                />
+              </td>
+              <td class="action-cell">
+                <div class="action-buttons">
+                  <a th:href="@{/admin_dashboard(id=${k.id})}" class="btn-edit">
+                    <i class="fas fa-edit"></i> Edit
+                  </a>
+                  <form
+                    th:action="@{/kandidat/submit}"
+                    method="post"
+                    style="display: inline"
+                  >
+                    <input type="hidden" name="id" th:value="${k.id}" />
+                    <button
+                      type="submit"
+                      name="delete"
+                      class="btn-hapus"
+                      onclick="return confirm('Yakin ingin menghapus kandidat ini?');"
+                    >
+                      <i class="fas fa-trash-alt"></i> Hapus
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Form Kelola Kandidat -->
+      <div class="second-box">
+        <div id="feedback-form">
+          <h2 class="header">Kelola Kandidat</h2>
+          <form
+            th:action="@{/kandidat/submit}"
+            method="post"
+            th:object="${kanInfo}"
+            enctype="multipart/form-data"
+            class="form-group"
+          >
+            <input type="hidden" th:field="*{id}" />
+
+            <label for="namaKandidat">Nama Kandidat:</label>
+            <input type="text" th:field="*{namaKandidat}" required />
+
+            <label for="visi">Visi:</label>
+            <textarea th:field="*{visi}" required></textarea>
+
+            <label for="misi">Misi:</label>
+            <textarea th:field="*{misi}" required></textarea>
+
+            <label for="sloganKandidat">Slogan:</label>
+            <input type="text" th:field="*{sloganKandidat}" required />
+
+            <label for="file">Foto Kandidat:</label>
+            <input type="file" id="file" name="file" accept="image/*" />
+
+            <div class="button-group">
+              <button
+                type="submit"
+                name="add"
+                class="btn btn-primary"
+                th:if="${kanInfo.id == null}"
+              >
+                Tambah
+              </button>
+              <button
+                type="submit"
+                name="edit"
+                class="btn btn-warning"
+                th:if="${kanInfo.id != null}"
+              >
+                Simpan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Hasil Voting -->
+      <div class="voting-results">
+        <h2>Hasil Voting</h2>
+        <h3>Total Suara: <span th:text="${totalVotes}">0</span></h3>
+        <div th:each="hasil : ${hasilVoting}" class="kandidat-result">
+          <h4 th:text="${hasil.namaKandidat}">Nama Kandidat</h4>
+          <p>
+            Jumlah Suara: <span th:text="${hasil.jumlahSuara}">0</span> (<span
+              th:text="${hasil.persentase}"
+              >0</span
+            >%)
+          </p>
+          <div class="progress-bar">
+            <div
+              class="progress"
+              th:style="'width: ' + ${hasil.persentase} + '%'"
+              style="background-color: blue; height: 20px"
+            ></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
